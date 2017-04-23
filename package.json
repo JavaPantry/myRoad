@@ -1,0 +1,21 @@
+{
+  "name": "myroad",
+  "version": "1.0.0",
+  "description": "knowledge map/graph editor",
+  "main": "myRoad.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "knowledge",
+    "map",
+    "graph",
+    "editor"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "jquery": "^2.2.2"
+  },
+  "author": "Alexei Ptitchkin",
+  "license": "ISC"
+}
