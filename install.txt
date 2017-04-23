@@ -1,0 +1,6 @@
+- C:\webStormWS\myRoad>npm init
+- Add bootstrap and jQuery to package.json
+- C:\webStormWS\myRoad>npm install
+- C:\webStormWS\myRoad>npm install d3@latest --save
+        this add "d3": "^4.8.0" to "dependencies" in package.json
+
