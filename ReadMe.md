@@ -8,6 +8,7 @@ Project for study javascript build process
 - https://www.viget.com/articles/gulp-browserify-starter-faq)
 
 ## Refernces
+[My notes](https://www.evernote.com/shard/s231/sh/fe84f0ba-d13a-4213-aa8e-4e83fbb67756/be702f3a8fb3d00b6773d0f749429cc7) 
 
 Google: "client side javascript module.exports" & "javascript module.exports example"
 
@@ -18,3 +19,5 @@ Google: "client side javascript module.exports" & "javascript module.exports exa
 [browserify](https://github.com/substack/node-browserify#usage)
 
 [Gulp + Broserify](https://www.viget.com/articles/gulp-browserify-starter-faq)
+
+[Gulp Getting Starting](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md)
