@@ -18,5 +18,9 @@
     "jquery": "^2.2.2"
   },
   "author": "Alexei Ptitchkin",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "browserify": "^14.3.0",
+    "gulp": "^3.9.1"
+  }
 }
