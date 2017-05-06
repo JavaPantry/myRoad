@@ -48,7 +48,7 @@ module.exports = function(RoadMap) {
 			var elements = me.getMeta().data;
 			var i, ilen;
 
-			me._ruler = me.getRuler();
+			//AVP: me._ruler = me.getRuler();
 
 			for (i = 0, ilen = elements.length; i < ilen; ++i) {
 				me.updateElement(elements[i], i, reset);
@@ -91,7 +91,7 @@ module.exports = function(RoadMap) {
 			var vscale = me.getValueScale();
 			var base = vscale.getBasePixel();
 			var horizontal = vscale.isHorizontal();
-			var ruler = me._ruler || me.getRuler();
+			//AVP: var ruler = me._ruler || me.getRuler();
 			var vpixels = me.calculateBarValuePixels(me.index, index);
 			var ipixels = me.calculateBarIndexPixels(me.index, index, ruler);
 
@@ -167,8 +167,8 @@ module.exports = function(RoadMap) {
 
 		/**
 		 * @private
-		 */
-		getRuler: function() {
+
+		//AVP: getRuler: function() {
 			var me = this;
 			var scale = me.getIndexScale();
 			//AVP: var options = scale.options;
@@ -180,9 +180,9 @@ module.exports = function(RoadMap) {
 			var barSize = 10; //AVP: fullBarSize * options.barPercentage;
 
 
-			/*AVP: barSize = Math.min(
-				helpers.getValueOrDefault(options.barThickness, barSize),
-				helpers.getValueOrDefault(options.maxBarThickness, Infinity));*/
+			//AVP: barSize = Math.min(
+			//AVP: 	helpers.getValueOrDefault(options.barThickness, barSize),
+			//AVP: 	helpers.getValueOrDefault(options.maxBarThickness, Infinity));
             barSize = 20;
 
             return {
@@ -195,7 +195,7 @@ module.exports = function(RoadMap) {
 				barSpacing: fullBarSize - barSize,
 				scale: scale
 			};
-		},
+		},*/
 
 		/**
 		 * Note: pixel values are not clamped to the scale area.
