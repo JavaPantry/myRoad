@@ -108,11 +108,20 @@ module.exports = function(RoadMap) {
 			// Corner points, from bottom-left to bottom-right clockwise
 			// | 1 2 |
 			// | 0 3 |
-			var corners = [
+			/*var corners = [
 				[left, bottom],
 				[left, top],
 				[right, top],
 				[right, bottom]
+			];*/
+/*randomScalingFactor = function() {
+ return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
+ };*/
+			var corners = [
+				[100+Math.round(Math.random() * 100), 100+Math.round(Math.random() * 100)],
+				[100+Math.round(Math.random() * 100), 250+Math.round(Math.random() * 100)],
+				[200+Math.round(Math.random() * 100), 250+Math.round(Math.random() * 100)],
+				[200+Math.round(Math.random() * 100), 100+Math.round(Math.random() * 100)]
 			];
 
 			// Find first (starting) corner with fallback to 'bottom'
