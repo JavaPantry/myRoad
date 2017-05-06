@@ -1,6 +1,6 @@
 {
   "name": "myroad",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "knowledge map/graph editor",
   "main": "myRoad.js",
   "scripts": {
@@ -37,7 +37,8 @@
     "gulp-util": "~2.2.x",
     "gulp-zip": "~3.2.0",
 
-    "merge-stream": "^1.0.0"
+    "merge-stream": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
 
   },
   "dependencies": {

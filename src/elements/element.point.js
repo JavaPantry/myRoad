@@ -1,9 +1,9 @@
 'use strict';
 
-module.exports = function(Chart) {
+module.exports = function(RoadMap) {
 
-	var helpers = Chart.helpers,
-		globalOpts = Chart.defaults.global,
+	var helpers = RoadMap.helpers,
+		globalOpts = RoadMap.defaults.global,
 		defaultColor = globalOpts.defaultColor;
 
 	globalOpts.elements.point = {
@@ -28,7 +28,7 @@ module.exports = function(Chart) {
 		return vm ? (Math.pow(mouseY - vm.y, 2) < Math.pow(vm.radius + vm.hitRadius, 2)) : false;
 	}
 
-	Chart.elements.Point = Chart.Element.extend({
+	RoadMap.elements.Point = RoadMap.Element.extend({
 		inRange: function(mouseX, mouseY) {
 			var vm = this._view;
 			return vm ? ((Math.pow(mouseX - vm.x, 2) + Math.pow(mouseY - vm.y, 2)) < Math.pow(vm.hitRadius + vm.radius, 2)) : false;
@@ -64,7 +64,7 @@ module.exports = function(Chart) {
 			var radius = vm.radius;
 			var x = vm.x;
 			var y = vm.y;
-			var color = Chart.helpers.color;
+			var color = RoadMap.helpers.color;
 			var errMargin = 1.01; // 1.01 is margin for Accumulated error. (Especially Edge, IE.)
 			var ratio = 0;
 
@@ -94,7 +94,7 @@ module.exports = function(Chart) {
 				ctx.fillStyle = color(ctx.fillStyle).alpha(ratio).rgbString();
 			}
 
-			Chart.canvasHelpers.drawPoint(ctx, pointStyle, radius, x, y);
+			RoadMap.canvasHelpers.drawPoint(ctx, pointStyle, radius, x, y);
 		}
 	});
 };

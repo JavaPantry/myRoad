@@ -2,9 +2,9 @@
 
 var color = require('chartjs-color');
 
-module.exports = function(Chart) {
+module.exports = function(RoadMap) {
 
-	var helpers = Chart.helpers;
+	var helpers = RoadMap.helpers;
 
 	function interpolate(start, view, model, ease) {
 		var keys = Object.keys(model);
@@ -55,14 +55,14 @@ module.exports = function(Chart) {
 		}
 	}
 
-	Chart.elements = {};
+	RoadMap.elements = {};
 
-	Chart.Element = function(configuration) {
+	RoadMap.Element = function(configuration) {
 		helpers.extend(this, configuration);
 		this.initialize.apply(this, arguments);
 	};
 
-	helpers.extend(Chart.Element.prototype, {
+	helpers.extend(RoadMap.Element.prototype, {
 
 		initialize: function() {
 			this.hidden = false;
@@ -115,5 +115,5 @@ module.exports = function(Chart) {
 		}
 	});
 
-	Chart.Element.extend = helpers.inherits;
+	RoadMap.Element.extend = helpers.inherits;
 };

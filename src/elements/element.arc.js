@@ -1,9 +1,9 @@
 'use strict';
 
-module.exports = function(Chart) {
+module.exports = function(RoadMap) {
 
-	var helpers = Chart.helpers,
-		globalOpts = Chart.defaults.global;
+	var helpers = RoadMap.helpers,
+		globalOpts = RoadMap.defaults.global;
 
 	globalOpts.elements.arc = {
 		backgroundColor: globalOpts.defaultColor,
@@ -11,7 +11,7 @@ module.exports = function(Chart) {
 		borderWidth: 2
 	};
 
-	Chart.elements.Arc = Chart.Element.extend({
+	RoadMap.elements.Arc = RoadMap.Element.extend({
 		inLabelRange: function(mouseX) {
 			var vm = this._view;
 

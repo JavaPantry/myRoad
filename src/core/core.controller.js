@@ -1,23 +1,23 @@
 'use strict';
 
-module.exports = function(Chart) {
+module.exports = function(RoadMap) {
 
-	var helpers = Chart.helpers;
-	var plugins = Chart.plugins;
-	var platform = Chart.platform;
+	var helpers = RoadMap.helpers;
+	var plugins = RoadMap.plugins;
+	var platform = RoadMap.platform;
 
-	// Create a dictionary of chart types, to allow for extension of existing types
-	Chart.types = {};
+	// Create a dictionary of RoadMap types, to allow for extension of existing types
+	RoadMap.types = {};
 
-	// Store a reference to each instance - allowing us to globally resize chart instances on window resize.
-	// Destroy method on the chart will remove the instance of the chart from this reference.
-	Chart.instances = {};
+	// Store a reference to each instance - allowing us to globally resize RoadMap instances on window resize.
+	// Destroy method on the RoadMap will remove the instance of the RoadMap from this reference.
+	RoadMap.instances = {};
 
 	// Controllers available for dataset visualization eg. bar, line, slice, etc.
-	Chart.controllers = {};
+	RoadMap.controllers = {};
 
 	/**
-	 * Initializes the given config with global and chart default values.
+	 * Initializes the given config with global and RoadMap default values.
 	 */
 	function initConfig(config) {
 		config = config || {};
@@ -29,16 +29,16 @@ module.exports = function(Chart) {
 		data.labels = data.labels || [];
 
 		config.options = helpers.configMerge(
-			Chart.defaults.global,
-			Chart.defaults[config.type],
+			RoadMap.defaults.global,
+			RoadMap.defaults[config.type],
 			config.options || {});
 
 		return config;
 	}
 
 	/**
-	 * Updates the config of the chart
-	 * @param chart {Chart} chart to update the options for
+	 * Updates the config of the RoadMap
+	 * @param RoadMap {RoadMap} RoadMap to update the options for
 	 */
 	function updateConfig(chart) {
 		var newOptions = chart.options;
@@ -48,19 +48,19 @@ module.exports = function(Chart) {
 			chart.scale.options = newOptions.scale;
 		} else if (newOptions.scales) {
 			newOptions.scales.xAxes.concat(newOptions.scales.yAxes).forEach(function(scaleOptions) {
-				chart.scales[scaleOptions.id].options = scaleOptions;
+				//AVP: chart.scales[scaleOptions.id].options = scaleOptions;
 			});
 		}
 
 		// Tooltip
-		chart.tooltip._options = newOptions.tooltips;
+		//AVP: chart.tooltip._options = newOptions.tooltips;
 	}
 
 	function positionIsHorizontal(position) {
 		return position === 'top' || position === 'bottom';
 	}
 
-	helpers.extend(Chart.prototype, /** @lends Chart */ {
+	helpers.extend(RoadMap.prototype, /** @lends RoadMap */ {
 		/**
 		 * @private
 		 */
@@ -85,9 +85,9 @@ module.exports = function(Chart) {
 			me._bufferedRender = false;
 
 			/**
-			 * Provided for backward compatibility, Chart and Chart.Controller have been merged,
+			 * Provided for backward compatibility, RoadMap and RoadMap.Controller have been merged,
 			 * the "instance" still need to be defined since it might be called from plugins.
-			 * @prop Chart#chart
+			 * @prop RoadMap#chart
 			 * @deprecated since version 2.6.0
 			 * @todo remove at version 3
 			 * @private
@@ -96,7 +96,7 @@ module.exports = function(Chart) {
 			me.controller = me;  // chart.chart.controller #inception
 
 			// Add the chart instance to the global namespace
-			Chart.instances[me.id] = me;
+			RoadMap.instances[me.id] = me;
 
 			// Define alias to the config data: `chart.data === chart.config.data`
 			Object.defineProperty(me, 'data', {
@@ -112,7 +112,7 @@ module.exports = function(Chart) {
 				// The given item is not a compatible context2d element, let's return before finalizing
 				// the chart initialization but after setting basic chart / controller properties that
 				// can help to figure out that the chart is not valid (e.g chart.canvas !== null);
-				// https://github.com/chartjs/Chart.js/issues/2807
+				// https://github.com/chartjs/RoadMap.js/issues/2807
 				console.error("Failed to create chart: can't acquire context from the given item");
 				return;
 			}
@@ -128,14 +128,14 @@ module.exports = function(Chart) {
 			var me = this;
 
 			// Before init plugin notification
-			plugins.notify(me, 'beforeInit');
+			//AVP: plugins.notify(me, 'beforeInit');
 
 			helpers.retinaScale(me);
 
 			me.bindEvents();
 
 			if (me.options.responsive) {
-				// Initial resize before chart draws (must be silent to preserve initial animations).
+				// Initial resize before roadMap draws (must be silent to preserve initial animations).
 				me.resize(true);
 			}
 
@@ -145,7 +145,7 @@ module.exports = function(Chart) {
 			me.initToolTip();
 
 			// After init plugin notification
-			plugins.notify(me, 'afterInit');
+			//AVP: plugins.notify(me, 'afterInit');
 
 			return me;
 		},
@@ -157,7 +157,7 @@ module.exports = function(Chart) {
 
 		stop: function() {
 			// Stops any current animation loop occurring
-			Chart.animationService.cancelAnimation(this);
+			RoadMap.animationService.cancelAnimation(this);
 			return this;
 		},
 
@@ -186,7 +186,7 @@ module.exports = function(Chart) {
 			if (!silent) {
 				// Notify any plugins about the resize
 				var newSize = {width: newWidth, height: newHeight};
-				plugins.notify(me, 'resize', [newSize]);
+                //AVP: plugins.notify(me, 'resize', [newSize]);
 
 				// Notify of resize
 				if (me.options.onResize) {
@@ -248,7 +248,7 @@ module.exports = function(Chart) {
 			helpers.each(items, function(item) {
 				var scaleOptions = item.options;
 				var scaleType = helpers.getValueOrDefault(scaleOptions.type, item.dtype);
-				var scaleClass = Chart.scaleService.getScaleConstructor(scaleType);
+				var scaleClass = RoadMap.scaleService.getScaleConstructor(scaleType);
 				if (!scaleClass) {
 					return;
 				}
@@ -261,7 +261,7 @@ module.exports = function(Chart) {
 					id: scaleOptions.id,
 					options: scaleOptions,
 					ctx: me.ctx,
-					chart: me
+					roadMap: me
 				});
 
 				scales[scale.id] = scale;
@@ -274,7 +274,7 @@ module.exports = function(Chart) {
 				}
 			});
 
-			Chart.scaleService.addScalesToLayout(this);
+			//AVP: RoadMap.scaleService.addScalesToLayout(this);
 		},
 
 		buildOrUpdateControllers: function() {
@@ -293,7 +293,7 @@ module.exports = function(Chart) {
 				if (meta.controller) {
 					meta.controller.updateIndex(datasetIndex);
 				} else {
-					var ControllerClass = Chart.controllers[meta.type];
+					var ControllerClass = RoadMap.controllers[meta.type];
 					if (ControllerClass === undefined) {
 						throw new Error('"' + meta.type + '" is not a chart type.');
 					}
@@ -331,7 +331,7 @@ module.exports = function(Chart) {
 		*/
 		reset: function() {
 			this.resetElements();
-			this.tooltip.initialize();
+			//this.tooltip.initialize();
 		},
 
 		update: function(animationDuration, lazy) {
@@ -339,12 +339,12 @@ module.exports = function(Chart) {
 
 			updateConfig(me);
 
-			if (plugins.notify(me, 'beforeUpdate') === false) {
+			/*AVP: if (plugins.notify(me, 'beforeUpdate') === false) {
 				return;
-			}
+			}*/
 
 			// In case the entire data object changed
-			me.tooltip._data = me.data;
+			//me.tooltip._data = me.data;
 
 			// Make sure dataset controllers are updated and new controllers are reset
 			var newControllers = me.buildOrUpdateControllers();
@@ -364,7 +364,7 @@ module.exports = function(Chart) {
 			me.updateDatasets();
 
 			// Do this before render so that any plugins that need final scale updates can use it
-			plugins.notify(me, 'afterUpdate');
+            //AVP: plugins.notify(me, 'afterUpdate');
 
 			if (me._bufferedRender) {
 				me._bufferedRequest = {
@@ -384,11 +384,11 @@ module.exports = function(Chart) {
 		updateLayout: function() {
 			var me = this;
 
-			if (plugins.notify(me, 'beforeLayout') === false) {
+			/*AVP: if (plugins.notify(me, 'beforeLayout') === false) {
 				return;
-			}
+			}*/
 
-			Chart.layoutService.update(this, this.width, this.height);
+			RoadMap.layoutService.update(this, this.width, this.height);
 
 			/**
 			 * Provided for backward compatibility, use `afterLayout` instead.
@@ -397,8 +397,8 @@ module.exports = function(Chart) {
 			 * @todo remove at version 3
 			 * @private
 			 */
-			plugins.notify(me, 'afterScaleUpdate');
-			plugins.notify(me, 'afterLayout');
+			/*AVP: plugins.notify(me, 'afterScaleUpdate');
+			plugins.notify(me, 'afterLayout');*/
 		},
 
 		/**
@@ -409,15 +409,15 @@ module.exports = function(Chart) {
 		updateDatasets: function() {
 			var me = this;
 
-			if (plugins.notify(me, 'beforeDatasetsUpdate') === false) {
+			/*AVP: if (plugins.notify(me, 'beforeDatasetsUpdate') === false) {
 				return;
-			}
+			}*/
 
 			for (var i = 0, ilen = me.data.datasets.length; i < ilen; ++i) {
 				me.updateDataset(i);
 			}
 
-			plugins.notify(me, 'afterDatasetsUpdate');
+			//AVP: plugins.notify(me, 'afterDatasetsUpdate');
 		},
 
 		/**
@@ -433,30 +433,30 @@ module.exports = function(Chart) {
 				index: index
 			};
 
-			if (plugins.notify(me, 'beforeDatasetUpdate', [args]) === false) {
+			/*AVP: if (plugins.notify(me, 'beforeDatasetUpdate', [args]) === false) {
 				return;
-			}
+			}*/
 
 			meta.controller.update();
 
-			plugins.notify(me, 'afterDatasetUpdate', [args]);
+            //AVP: plugins.notify(me, 'afterDatasetUpdate', [args]);
 		},
 
 		render: function(duration, lazy) {
 			var me = this;
 
-			if (plugins.notify(me, 'beforeRender') === false) {
+			/*AVP: if (plugins.notify(me, 'beforeRender') === false) {
 				return;
-			}
+			}*/
 
 			var animationOptions = me.options.animation;
 			var onComplete = function(animation) {
-				plugins.notify(me, 'afterRender');
+                //AVP: plugins.notify(me, 'afterRender');
 				helpers.callback(animationOptions && animationOptions.onComplete, [animation], me);
 			};
 
 			if (animationOptions && ((typeof duration !== 'undefined' && duration !== 0) || (typeof duration === 'undefined' && animationOptions.duration !== 0))) {
-				var animation = new Chart.Animation({
+				var animation = new RoadMap.Animation({
 					numSteps: (duration || animationOptions.duration) / 16.66, // 60 fps
 					easing: animationOptions.easing,
 
@@ -472,12 +472,12 @@ module.exports = function(Chart) {
 					onAnimationComplete: onComplete
 				});
 
-				Chart.animationService.addAnimation(me, animation, duration, lazy);
+				RoadMap.animationService.addAnimation(me, animation, duration, lazy);
 			} else {
 				me.draw();
 
-				// See https://github.com/chartjs/Chart.js/issues/3781
-				onComplete(new Chart.Animation({numSteps: 0, chart: me}));
+				// See https://github.com/chartjs/RoadMap.js/issues/3781
+				//onComplete(new RoadMap.Animation({numSteps: 0, chart: me}));
 			}
 
 			return me;
@@ -494,9 +494,9 @@ module.exports = function(Chart) {
 
 			me.transition(easingValue);
 
-			if (plugins.notify(me, 'beforeDraw', [easingValue]) === false) {
+			/*AVP: if (plugins.notify(me, 'beforeDraw', [easingValue]) === false) {
 				return;
-			}
+			}*/
 
 			// Draw all the scales
 			helpers.each(me.boxes, function(box) {
@@ -510,9 +510,9 @@ module.exports = function(Chart) {
 			me.drawDatasets(easingValue);
 
 			// Finally draw the tooltip
-			me.tooltip.draw();
+			//me.tooltip.draw();
 
-			plugins.notify(me, 'afterDraw', [easingValue]);
+			//AVP: plugins.notify(me, 'afterDraw', [easingValue]);
 		},
 
 		/**
@@ -527,7 +527,7 @@ module.exports = function(Chart) {
 				}
 			}
 
-			me.tooltip.transition(easingValue);
+			//me.tooltip.transition(easingValue);
 		},
 
 		/**
@@ -538,9 +538,9 @@ module.exports = function(Chart) {
 		drawDatasets: function(easingValue) {
 			var me = this;
 
-			if (plugins.notify(me, 'beforeDatasetsDraw', [easingValue]) === false) {
+			/*AVP: if (plugins.notify(me, 'beforeDatasetsDraw', [easingValue]) === false) {
 				return;
-			}
+			}*/
 
 			// Draw datasets reversed to support proper line stacking
 			for (var i=(me.data.datasets || []).length - 1; i >= 0; --i) {
@@ -549,7 +549,7 @@ module.exports = function(Chart) {
 				}
 			}
 
-			plugins.notify(me, 'afterDatasetsDraw', [easingValue]);
+			//AVP: plugins.notify(me, 'afterDatasetsDraw', [easingValue]);
 		},
 
 		/**
@@ -566,40 +566,40 @@ module.exports = function(Chart) {
 				easingValue: easingValue
 			};
 
-			if (plugins.notify(me, 'beforeDatasetDraw', [args]) === false) {
+			/*AVP: if (plugins.notify(me, 'beforeDatasetDraw', [args]) === false) {
 				return;
-			}
+			}*/
 
 			meta.controller.draw(easingValue);
 
-			plugins.notify(me, 'afterDatasetDraw', [args]);
+			//AVP: plugins.notify(me, 'afterDatasetDraw', [args]);
 		},
 
 		// Get the single element that was clicked on
 		// @return : An object containing the dataset index and element index of the matching element. Also contains the rectangle that was draw
 		getElementAtEvent: function(e) {
-			return Chart.Interaction.modes.single(this, e);
+			return RoadMap.Interaction.modes.single(this, e);
 		},
 
 		getElementsAtEvent: function(e) {
-			return Chart.Interaction.modes.label(this, e, {intersect: true});
+			return RoadMap.Interaction.modes.label(this, e, {intersect: true});
 		},
 
 		getElementsAtXAxis: function(e) {
-			return Chart.Interaction.modes['x-axis'](this, e, {intersect: true});
+			return RoadMap.Interaction.modes['x-axis'](this, e, {intersect: true});
 		},
 
 		getElementsAtEventForMode: function(e, mode, options) {
-			var method = Chart.Interaction.modes[mode];
+			/*AVP: var method = RoadMap.Interaction.modes[mode];
 			if (typeof method === 'function') {
 				return method(this, e, options);
-			}
+			}*/
 
 			return [];
 		},
 
 		getDatasetAtEvent: function(e) {
-			return Chart.Interaction.modes.dataset(this, e, {intersect: true});
+			return RoadMap.Interaction.modes.dataset(this, e, {intersect: true});
 		},
 
 		getDatasetMeta: function(datasetIndex) {
@@ -671,9 +671,9 @@ module.exports = function(Chart) {
 				me.ctx = null;
 			}
 
-			plugins.notify(me, 'destroy');
+			//AVP: plugins.notify(me, 'destroy');
 
-			delete Chart.instances[me.id];
+			delete RoadMap.instances[me.id];
 		},
 
 		toBase64Image: function() {
@@ -682,13 +682,13 @@ module.exports = function(Chart) {
 
 		initToolTip: function() {
 			var me = this;
-			me.tooltip = new Chart.Tooltip({
+			/*me.tooltip = new RoadMap.Tooltip({
 				_chart: me,
 				_chartInstance: me,            // deprecated, backward compatibility
 				_data: me.data,
 				_options: me.options.tooltips
 			}, me);
-			me.tooltip.initialize();
+			me.tooltip.initialize();*/
 		},
 
 		/**
@@ -709,7 +709,7 @@ module.exports = function(Chart) {
 			// Responsiveness is currently based on the use of an iframe, however this method causes
 			// performance issues and could be troublesome when used with ad blockers. So make sure
 			// that the user is still able to create a chart without iframe when responsive is false.
-			// See https://github.com/chartjs/Chart.js/issues/2210
+			// See https://github.com/chartjs/RoadMap.js/issues/2210
 			if (me.options.responsive) {
 				listener = function() {
 					me.resize();
@@ -753,20 +753,20 @@ module.exports = function(Chart) {
 		 */
 		eventHandler: function(e) {
 			var me = this;
-			var tooltip = me.tooltip;
+			//var tooltip = me.tooltip;
 
-			if (plugins.notify(me, 'beforeEvent', [e]) === false) {
+			/*AVP: if (plugins.notify(me, 'beforeEvent', [e]) === false) {
 				return;
-			}
+			}*/
 
 			// Buffer any update calls so that renders do not occur
 			me._bufferedRender = true;
 			me._bufferedRequest = null;
 
 			var changed = me.handleEvent(e);
-			changed |= tooltip && tooltip.handleEvent(e);
+			//changed |= tooltip && tooltip.handleEvent(e);
 
-			plugins.notify(me, 'afterEvent', [e]);
+			//AVP: plugins.notify(me, 'afterEvent', [e]);
 
 			var bufferedRequest = me._bufferedRequest;
 			if (bufferedRequest) {
@@ -841,11 +841,11 @@ module.exports = function(Chart) {
 	});
 
 	/**
-	 * Provided for backward compatibility, use Chart instead.
-	 * @class Chart.Controller
+	 * Provided for backward compatibility, use RoadMap instead.
+	 * @class RoadMap.Controller
 	 * @deprecated since version 2.6.0
 	 * @todo remove at version 3
 	 * @private
 	 */
-	Chart.Controller = Chart;
+	RoadMap.Controller = RoadMap;
 };

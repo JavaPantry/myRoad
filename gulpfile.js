@@ -14,7 +14,7 @@ var zip = require('gulp-zip');
 var exec = require('child-process-promise').exec;
 //var karma = require('karma');
 var browserify = require('browserify');
-//var source = require('vinyl-source-stream');
+var source = require('vinyl-source-stream');
 var merge = require('merge-stream');
 var collapse = require('bundle-collapser/plugin');
 var argv  = require('yargs').argv
@@ -26,26 +26,22 @@ var outDir = './dist/';
 var testDir = './test/';
 
 var header = "/*!\n" +
-  " * Chart.js\n" +
-  " * http://chartjs.org/\n" +
+  " * RoadMap.js\n" +
   " * Version: {{ version }}\n" +
   " *\n" +
-  " * Copyright 2017 Nick Downie\n" +
-  " * Released under the MIT license\n" +
-  " * https://github.com/chartjs/Chart.js/blob/master/LICENSE.md\n" +
   " */\n";
 
 gulp.task('bower', bowerTask);
 gulp.task('build', buildTask);
 gulp.task('package', packageTask);
 gulp.task('watch', watchTask);
-gulp.task('lint', lintTask);
-gulp.task('docs', docsTask);
-gulp.task('test', ['lint', 'validHTML', 'unittest']);
+//gulp.task('lint', lintTask);
+//gulp.task('docs', docsTask);
+//gulp.task('test', ['lint', 'validHTML', 'unittest']);
 gulp.task('size', ['library-size', 'module-sizes']);
 gulp.task('server', serverTask);
-gulp.task('validHTML', validHTMLTask);
-gulp.task('unittest', unittestTask);
+//gulp.task('validHTML', validHTMLTask);
+//gulp.task('unittest', unittestTask);
 gulp.task('library-size', librarySizeTask);
 gulp.task('module-sizes', moduleSizesTask);
 gulp.task('_open', _openTask);
@@ -122,15 +118,17 @@ function packageTask() {
         .pipe(streamify(replace(/src="((?:\.\.\/)+)dist\//g, 'src="$1')))
   )
   // finally, create the zip archive
-  .pipe(zip('Chart.js.zip'))
+  .pipe(zip('RoadMap.js.zip'))
   .pipe(gulp.dest(outDir));
 }
 
+/*
 function lintTask() {
   var files = [
-    srcDir + '**/*.js',
-    testDir + '**/*.js'
+    srcDir + '**!/!*.js',
+    testDir + '**!/!*.js'
   ];
+
 
   // NOTE(SB) codeclimate has 'complexity' and 'max-statements' eslint rules way too strict
   // compare to what the current codebase can support, and since it's not straightforward
@@ -162,9 +160,9 @@ function lintTask() {
     .pipe(eslint(options))
     .pipe(eslint.format())
     .pipe(eslint.failAfterError());
-}
+}*/
 
-function docsTask(done) {
+/*function docsTask(done) {
   const script = require.resolve('gitbook-cli/bin/gitbook.js');
   const cmd = process.execPath;
 
@@ -175,27 +173,16 @@ function docsTask(done) {
   }).then(() => {
     done();
   });
-}
+}*/
 
+/*
 function validHTMLTask() {
-  return gulp.src('samples/*.html')
+  return gulp.src('samples/!*.html')
     .pipe(htmlv());
 }
+*/
 
-function startTest() {
-  return [
-    {pattern: './test/fixtures/**/*.json', included: false},
-    {pattern: './test/fixtures/**/*.png', included: false},
-    './node_modules/moment/min/moment.min.js',
-    './test/jasmine.index.js',
-    './src/**/*.js',
-  ].concat(
-    argv.inputs?
-      argv.inputs.split(';'):
-      ['./test/specs/**/*.js']
-  );
-}
-
+/*
 function unittestTask(done) {
   new karma.Server({
     configFile: path.join(__dirname, 'karma.conf.js'),
@@ -206,13 +193,30 @@ function unittestTask(done) {
     }
   }, done).start();
 }
+*/
 
 function librarySizeTask() {
-  return gulp.src('dist/Chart.bundle.min.js')
+  return gulp.src('dist/RoadMap.bundle.min.js')
     .pipe(size({
       gzip: true
     }));
 }
+
+/*
+function startTest() {
+    return [
+        {pattern: './test/fixtures/!**!/!*.json', included: false},
+        {pattern: './test/fixtures/!**!/!*.png', included: false},
+        './node_modules/moment/min/moment.min.js',
+        './test/jasmine.index.js',
+        './src/!**!/!*.js',
+    ].concat(
+        argv.inputs?
+            argv.inputs.split(';'):
+            ['./test/specs/!**!/!*.js']
+    );
+}
+*/
 
 function moduleSizesTask() {
   return gulp.src(srcDir + '**/*.js')

@@ -1,8 +1,8 @@
 'use strict';
 
-module.exports = function(Chart) {
+module.exports = function(RoadMap) {
 	// Global Chart canvas helpers object for drawing items to canvas
-	var helpers = Chart.canvasHelpers = {};
+	var helpers = RoadMap.canvasHelpers = {};
 
 	helpers.drawPoint = function(ctx, pointStyle, radius, x, y) {
 		var type, edgeLength, xOffset, yOffset, height, size;
@@ -48,7 +48,7 @@ module.exports = function(Chart) {
 			var leftX = x - offset;
 			var topY = y - offset;
 			var sideSize = Math.SQRT2 * radius;
-			Chart.helpers.drawRoundedRectangle(ctx, leftX, topY, sideSize, sideSize, radius / 2);
+			RoadMap.helpers.drawRoundedRectangle(ctx, leftX, topY, sideSize, sideSize, radius / 2);
 			ctx.fill();
 			break;
 		case 'rectRot':
@@ -146,5 +146,5 @@ module.exports = function(Chart) {
 			target.y);
 	};
 
-	Chart.helpers.canvas = helpers;
+	RoadMap.helpers.canvas = helpers;
 };

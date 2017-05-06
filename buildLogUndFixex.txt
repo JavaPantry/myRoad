@@ -1,0 +1,27 @@
+C:\intellijWS\myRoad>gulp build
+[14:10:06] Using gulpfile C:\intellijWS\myRoad\gulpfile.js
+[14:10:06] Starting 'build'...
+[14:10:06] 'build' errored after 25 ms
+[14:10:06] ReferenceError: source is not defined
+    at Gulp.buildTask (C:\intellijWS\myRoad\gulpfile.js:86:11)
+    at module.exports (C:\intellijWS\myRoad\node_modules\orchestrator\lib\runTask.js:34:7)
+
+
+
+Added to gulpfile.js
+var source = require('vinyl-source-stream');
+and     "vinyl-source-stream": "^1.1.0",  to package.json
+
+C:\intellijWS\myRoad>gulp build
+[14:28:45] Using gulpfile C:\intellijWS\myRoad\gulpfile.js
+[14:28:45] Starting 'build'...
+[14:28:47] Finished 'build' after 2.63 s
+
+Explains why this helped
+About vinyl-source-stream
+http://stackoverflow.com/questions/30794356/why-do-i-have-to-use-vinyl-source-stream-with-gulp
+        \-> https://medium.com/@contrahacks/gulp-3828e8126466
+
+----------------------------------------------------------------------------------------------------------------
+
+

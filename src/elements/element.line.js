@@ -1,11 +1,11 @@
 'use strict';
 
-module.exports = function(Chart) {
+module.exports = function(RoadMap) {
 
-	var helpers = Chart.helpers;
-	var globalDefaults = Chart.defaults.global;
+	var helpers = RoadMap.helpers;
+	var globalDefaults = RoadMap.defaults.global;
 
-	Chart.defaults.global.elements.line = {
+	RoadMap.defaults.global.elements.line = {
 		tension: 0.4,
 		backgroundColor: globalDefaults.defaultColor,
 		borderWidth: 3,
@@ -18,7 +18,7 @@ module.exports = function(Chart) {
 		fill: true, // do we fill in the area between the line and its base axis
 	};
 
-	Chart.elements.Line = Chart.Element.extend({
+	RoadMap.elements.Line = RoadMap.Element.extend({
 		draw: function() {
 			var me = this;
 			var vm = me._view;

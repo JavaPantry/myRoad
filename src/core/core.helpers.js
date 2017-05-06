@@ -4,9 +4,9 @@
 
 var color = require('chartjs-color');
 
-module.exports = function(Chart) {
+module.exports = function(RoadMap) {
 	// Global Chart helpers object for utility methods and classes
-	var helpers = Chart.helpers = {};
+	var helpers = RoadMap.helpers = {};
 
 	// -- Basic js utility methods
 	helpers.each = function(loopable, callback, self, reverse) {
@@ -66,7 +66,7 @@ module.exports = function(Chart) {
 					base[key] = helpers.scaleMerge(baseVal, value);
 				} else if (key === 'scale') {
 					// Used in polar area & radar charts since there is only one scale
-					base[key] = helpers.configMerge(baseVal, Chart.scaleService.getScaleDefaults(value.type), value);
+					base[key] = helpers.configMerge(baseVal, RoadMap.scaleService.getScaleDefaults(value.type), value);
 				} else if (baseHasProperty
 						&& typeof baseVal === 'object'
 						&& !helpers.isArray(baseVal)
@@ -93,7 +93,7 @@ module.exports = function(Chart) {
 				if (base.hasOwnProperty(key)) {
 					helpers.each(value, function(valueObj, index) {
 						var axisType = helpers.getValueOrDefault(valueObj.type, key === 'xAxes' ? 'category' : 'linear');
-						var axisDefaults = Chart.scaleService.getScaleDefaults(axisType);
+						var axisDefaults = RoadMap.scaleService.getScaleDefaults(axisType);
 						if (index >= base[key].length || !base[key][index].type) {
 							base[key].push(helpers.configMerge(axisDefaults, valueObj));
 						} else if (valueObj.type && valueObj.type !== base[key][index].type) {
@@ -108,7 +108,7 @@ module.exports = function(Chart) {
 					base[key] = [];
 					helpers.each(value, function(valueObj) {
 						var axisType = helpers.getValueOrDefault(valueObj.type, key === 'xAxes' ? 'category' : 'linear');
-						base[key].push(helpers.configMerge(Chart.scaleService.getScaleDefaults(axisType), valueObj));
+						base[key].push(helpers.configMerge(RoadMap.scaleService.getScaleDefaults(axisType), valueObj));
 					});
 				}
 			} else if (base.hasOwnProperty(key) && typeof base[key] === 'object' && base[key] !== null && typeof value === 'object') {
@@ -832,7 +832,7 @@ module.exports = function(Chart) {
 
 		// If no style has been set on the canvas, the render size is used as display size,
 		// making the chart visually bigger, so let's enforce it to the "correct" values.
-		// See https://github.com/chartjs/Chart.js/issues/3575
+		// See https://github.com/chartjs/RoadMap.js/issues/3575
 		canvas.style.height = height + 'px';
 		canvas.style.width = width + 'px';
 	};
@@ -925,7 +925,7 @@ module.exports = function(Chart) {
 		function(value) {
 			/* global CanvasGradient */
 			if (value instanceof CanvasGradient) {
-				value = Chart.defaults.global.defaultColor;
+				value = RoadMap.defaults.global.defaultColor;
 			}
 
 			return color(value);
@@ -975,8 +975,8 @@ module.exports = function(Chart) {
 	};
 
 	/**
-	 * Provided for backward compatibility, use Chart.helpers#callback instead.
-	 * @function Chart.helpers#callCallback
+	 * Provided for backward compatibility, use RoadMap.helpers#callback instead.
+	 * @function RoadMap.helpers#callCallback
 	 * @deprecated since version 2.6.0
 	 * @todo remove at version 3
 	 */

@@ -1,8 +1,8 @@
 'use strict';
 
-module.exports = function(Chart) {
+module.exports = function(RoadMap) {
 
-	var globalOpts = Chart.defaults.global;
+	var globalOpts = RoadMap.defaults.global;
 
 	globalOpts.elements.rectangle = {
 		backgroundColor: globalOpts.defaultColor,
@@ -18,7 +18,7 @@ module.exports = function(Chart) {
 	/**
 	 * Helper function to get the bounds of the bar regardless of the orientation
 	 * @private
-	 * @param bar {Chart.Element.Rectangle} the bar
+	 * @param bar {RoadMap.Element.Rectangle} the bar
 	 * @return {Bounds} bounds of the bar
 	 */
 	function getBarBounds(bar) {
@@ -49,7 +49,7 @@ module.exports = function(Chart) {
 		};
 	}
 
-	Chart.elements.Rectangle = Chart.Element.extend({
+	RoadMap.elements.Rectangle = RoadMap.Element.extend({
 		draw: function() {
 			var ctx = this._chart.ctx;
 			var vm = this._view;
