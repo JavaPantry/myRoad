@@ -28,11 +28,20 @@
         var color = RoadMap.helpers.color;
         var barChartData = {
             labels: ["January", "February", "March", "April", "May", "June", "July"],
+            vertex:[{id:'1',x:10,y:100,title:'v'},
+                    {id:'2',x:30,y:80,title:'v'},
+                    {id:'3',x:50,y:100,title:'v'},
+                    {id:'4',x:70,y:120,title:'v'}],
+            edges:[{src:'1',dst:'2'},
+                    {src:'2',dst:'3'},
+                    {src:'3',dst:'4'},
+                    {src:'4',dst:'1'}],
             datasets: [{
                 label: 'Dataset 1',
                 backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
                 borderColor: window.chartColors.green,
                 borderWidth: 1,
+
                 data: [
                     randomScalingFactor(),
                     randomScalingFactor(),

@@ -140,9 +140,9 @@ module.exports = function(RoadMap) {
 			}
 
 			// Make sure scales have IDs and are built before we build any controllers.
-			me.ensureScalesHaveIDs();
+			/*me.ensureScalesHaveIDs();
 			me.buildScales();
-			me.initToolTip();
+			me.initToolTip();*/
 
 			// After init plugin notification
 			//AVP: plugins.notify(me, 'afterInit');
@@ -219,7 +219,7 @@ module.exports = function(RoadMap) {
 		/**
 		 * Builds a map of scale ID to scale object for future lookup.
 		 */
-		buildScales: function() {
+		/*buildScales: function() {
 			var me = this;
 			var options = me.options;
 			var scales = me.scales = {};
@@ -275,7 +275,7 @@ module.exports = function(RoadMap) {
 			});
 
 			//AVP: RoadMap.scaleService.addScalesToLayout(this);
-		},
+		},*/
 
 		buildOrUpdateControllers: function() {
 			var me = this;
@@ -388,7 +388,7 @@ module.exports = function(RoadMap) {
 				return;
 			}*/
 
-			RoadMap.layoutService.update(this, this.width, this.height);
+			//AVP: RoadMap.layoutService.update(this, this.width, this.height);
 
 			/**
 			 * Provided for backward compatibility, use `afterLayout` instead.

@@ -63,8 +63,8 @@ module.exports = function(RoadMap) {
 			var custom = rectangle.custom || {};
 			var rectangleOptions = chart.options.elements.rectangle;
 
-			rectangle._xScale = me.getScaleForId(meta.xAxisID);
-			rectangle._yScale = me.getScaleForId(meta.yAxisID);
+			//rectangle._xScale = me.getScaleForId(meta.xAxisID);
+			//rectangle._yScale = me.getScaleForId(meta.yAxisID);
 			rectangle._datasetIndex = me.index;
 			rectangle._index = index;
 
@@ -120,16 +120,16 @@ module.exports = function(RoadMap) {
 		/**
 		 * @private
 		 */
-		getValueScale: function() {
+		/*getValueScale: function() {
 			return this.getScaleForId(this.getValueScaleId());
-		},
+		},*/
 
 		/**
 		 * @private
 		 */
-		getIndexScale: function() {
+		/*getIndexScale: function() {
 			return this.getScaleForId(this.getIndexScaleId());
-		},
+		},*/
 
 		/**
 		 * Returns the effective number of stacks based on groups and bar visibility.
@@ -275,7 +275,7 @@ module.exports = function(RoadMap) {
 			var i = 0;
 			var d;
 
-			helpers.canvas.clipArea(chart.ctx, chart.chartArea);
+			//helpers.canvas.clipArea(chart.ctx, chart.chartArea);
 
 			for (; i<ilen; ++i) {
 				d = dataset.data[i];
@@ -284,7 +284,7 @@ module.exports = function(RoadMap) {
 				}
 			}
 
-			helpers.canvas.unclipArea(chart.ctx);
+			//helpers.canvas.unclipArea(chart.ctx);
 		},
 
 		setHoverStyle: function(rectangle) {

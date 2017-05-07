@@ -98,7 +98,7 @@ module.exports = function(RoadMap) {
 			var me = this;
 			me.chart = chart;
 			me.index = datasetIndex;
-			me.linkScales();
+			//me.linkScales();
 			me.addElements();
 		},
 
@@ -106,7 +106,7 @@ module.exports = function(RoadMap) {
 			this.index = datasetIndex;
 		},
 
-		linkScales: function() {
+		/*linkScales: function() {
 			var me = this;
 			var meta = me.getMeta();
 			var dataset = me.getDataset();
@@ -117,7 +117,7 @@ module.exports = function(RoadMap) {
 			if (meta.yAxisID === null) {
 				meta.yAxisID = dataset.yAxisID || me.chart.options.scales.yAxes[0].id;
 			}
-		},
+		},*/
 
 		getDataset: function() {
 			return this.chart.data.datasets[this.index];
@@ -127,9 +127,9 @@ module.exports = function(RoadMap) {
 			return this.chart.getDatasetMeta(this.index);
 		},
 
-		getScaleForId: function(scaleID) {
+		/*getScaleForId: function(scaleID) {
 			return this.chart.scales[scaleID];
-		},
+		},*/
 
 		reset: function() {
 			this.update(true);

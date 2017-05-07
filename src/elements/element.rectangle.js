@@ -114,9 +114,8 @@ module.exports = function(RoadMap) {
 				[right, top],
 				[right, bottom]
 			];*/
-/*randomScalingFactor = function() {
- return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
- };*/
+
+			//AVP: this._chart.config.data.datasets[0].data
 			var corners = [
 				[100+Math.round(Math.random() * 100), 100+Math.round(Math.random() * 100)],
 				[100+Math.round(Math.random() * 100), 250+Math.round(Math.random() * 100)],
