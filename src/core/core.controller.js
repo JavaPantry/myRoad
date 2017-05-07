@@ -281,7 +281,7 @@ module.exports = function(RoadMap) {
 			var me = this;
 			var types = [];
 			var newControllers = [];
-
+			//AVP: me.config.data.vertex => me.data.vertex
 			helpers.each(me.data.datasets, function(dataset, datasetIndex) {
 				var meta = me.getDatasetMeta(datasetIndex);
 				if (!meta.type) {
@@ -321,6 +321,7 @@ module.exports = function(RoadMap) {
 		 */
 		resetElements: function() {
 			var me = this;
+            //AVP: me.config.data.vertex => me.data.vertex
 			helpers.each(me.data.datasets, function(dataset, datasetIndex) {
 				me.getDatasetMeta(datasetIndex).controller.reset();
 			}, me);
@@ -349,6 +350,7 @@ module.exports = function(RoadMap) {
 			// Make sure dataset controllers are updated and new controllers are reset
 			var newControllers = me.buildOrUpdateControllers();
 
+			//AVP: me.config.data.vertex => me.data.vertex
 			// Make sure all dataset controllers have correct meta data counts
 			helpers.each(me.data.datasets, function(dataset, datasetIndex) {
 				me.getDatasetMeta(datasetIndex).controller.buildOrUpdateElements();
