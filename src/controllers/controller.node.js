@@ -12,7 +12,7 @@ module.exports = function(RoadMap) {
 
     };
 
-    //AVP: node's controller
+    //AVP: node's controller (to replace chart specific 'bar' controller)
 	RoadMap.controllers.node = RoadMap.DatasetController.extend({
 
         dataElementType: null,// here we should define low level element class RoadMap.elements.Rectangle,
