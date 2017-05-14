@@ -14,6 +14,8 @@ module.exports = function(RoadMap) {
 
 	RoadMap.controllers.node = RoadMap.DatasetController.extend({
 
+        dataElementType: null,// here we should define low level element class RoadMap.elements.Rectangle,
+
 		initialize: function() {
 			RoadMap.DatasetController.prototype.initialize.apply(me, arguments);
 		},

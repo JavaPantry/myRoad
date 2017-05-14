@@ -33,7 +33,7 @@ module.exports = function() {
             elements: {},
 
             // Legend callback string
-            legendCallback: function(chart) {
+            /*legendCallback: function(chart) {
                 var text = [];
                 text.push('<ul class="' + chart.id + '-legend">');
                 for (var i = 0; i < chart.data.datasets.length; i++) {
@@ -46,7 +46,7 @@ module.exports = function() {
                 text.push('</ul>');
 
                 return text.join('');
-            }
+            }*/
         }
     };
 

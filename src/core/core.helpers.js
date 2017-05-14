@@ -770,26 +770,7 @@ module.exports = function(RoadMap) {
 			el.currentStyle[property] :
 			document.defaultView.getComputedStyle(el, null).getPropertyValue(property);
 	};
-	helpers.retinaScale = function(chart) {
-		var pixelRatio = chart.currentDevicePixelRatio = window.devicePixelRatio || 1;
-		if (pixelRatio === 1) {
-			return;
-		}
 
-		var canvas = chart.canvas;
-		var height = chart.height;
-		var width = chart.width;
-
-		canvas.height = height * pixelRatio;
-		canvas.width = width * pixelRatio;
-		chart.ctx.scale(pixelRatio, pixelRatio);
-
-		// If no style has been set on the canvas, the render size is used as display size,
-		// making the chart visually bigger, so let's enforce it to the "correct" values.
-		// See https://github.com/chartjs/RoadMap.js/issues/3575
-		canvas.style.height = height + 'px';
-		canvas.style.width = width + 'px';
-	};
 	// -- Canvas methods
 	helpers.clear = function(chart) {
 		chart.ctx.clearRect(0, 0, chart.width, chart.height);
