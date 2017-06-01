@@ -21,3 +21,25 @@ Google: "client side javascript module.exports" & "javascript module.exports exa
 [Gulp + Broserify](https://www.viget.com/articles/gulp-browserify-starter-faq)
 
 [Gulp Getting Starting](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md)
+
+
+C:\IntelliJ_WS\myRoad>npm install -g npm
+C:\Users\Q05459\AppData\Roaming\npm\npm -> C:\Users\Q05459\AppData\Roaming\npm\node_modules\npm\bin\npm-cli.js
+C:\Users\Q05459\AppData\Roaming\npm
+`-- npm@4.5.0
+
+C:\IntelliJ_WS\myRoad>npm install
+myroad@0.0.1 C:\IntelliJ_WS\myRoad
+`-- vinyl-source-stream@1.1.0
+  +-- through2@0.6.5
+  | `-- readable-stream@1.0.34
+  `-- vinyl@0.4.6
+    `-- clone@0.2.0
+
+npm WARN myroad@0.0.1 No repository field.
+
+C:\IntelliJ_WS\myRoad>gulp build
+[08:42:21] Using gulpfile C:\IntelliJ_WS\myRoad\gulpfile.js
+[08:42:21] Starting 'build'...
+[08:42:24] Finished 'build' after 2.9 s
+
