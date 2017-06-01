@@ -11,8 +11,10 @@ module.exports = function(RoadMap) {
 
 
     };
-
+    //AVP: master deadend before switch to minificationForGraph branch
 	RoadMap.controllers.node = RoadMap.DatasetController.extend({
+
+        dataElementType: null,// here we should define low level element class RoadMap.elements.Rectangle,
 
 		initialize: function() {
 			RoadMap.DatasetController.prototype.initialize.apply(me, arguments);

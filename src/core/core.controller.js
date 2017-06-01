@@ -127,25 +127,12 @@ module.exports = function(RoadMap) {
 		initialize: function() {
 			var me = this;
 
-			// Before init plugin notification
-			//AVP: plugins.notify(me, 'beforeInit');
-
-			helpers.retinaScale(me);
-
 			me.bindEvents();
 
 			if (me.options.responsive) {
 				// Initial resize before roadMap draws (must be silent to preserve initial animations).
 				me.resize(true);
 			}
-
-			// Make sure scales have IDs and are built before we build any controllers.
-			/*me.ensureScalesHaveIDs();
-			me.buildScales();
-			me.initToolTip();*/
-
-			// After init plugin notification
-			//AVP: plugins.notify(me, 'afterInit');
 
 			return me;
 		},
@@ -180,8 +167,6 @@ module.exports = function(RoadMap) {
 			canvas.height = me.height = newHeight;
 			canvas.style.width = newWidth + 'px';
 			canvas.style.height = newHeight + 'px';
-
-			helpers.retinaScale(me);
 
 			if (!silent) {
 				// Notify any plugins about the resize
@@ -293,6 +278,7 @@ module.exports = function(RoadMap) {
 				if (meta.controller) {
 					meta.controller.updateIndex(datasetIndex);
 				} else {
+					//AVP: create specific controller "bar"
 					var ControllerClass = RoadMap.controllers[meta.type];
 					if (ControllerClass === undefined) {
 						throw new Error('"' + meta.type + '" is not a chart type.');
@@ -645,9 +631,9 @@ module.exports = function(RoadMap) {
 			return typeof meta.hidden === 'boolean'? !meta.hidden : !this.data.datasets[datasetIndex].hidden;
 		},
 
-		generateLegend: function() {
+		/*generateLegend: function() {
 			return this.options.legendCallback(this);
-		},
+		},*/
 
 		destroy: function() {
 			var me = this;
